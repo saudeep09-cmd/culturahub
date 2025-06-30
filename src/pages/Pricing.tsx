@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Check, Crown, Zap, Star, CreditCard } from 'lucide-react';
+import { Check, Crown, Zap, Star } from 'lucide-react';
+import RazorpayPayment from '../components/RazorpayPayment';
 
 const plans = [
   {
     name: 'Free',
-    price: '$0',
+    price: 0,
     period: 'forever',
     description: 'Perfect for exploring cultural experiences',
     features: [
@@ -26,7 +27,7 @@ const plans = [
   },
   {
     name: 'Pro',
-    price: '$9',
+    price: 749,
     period: 'per month',
     description: 'Full access for cultural creators and enthusiasts',
     features: [
@@ -49,13 +50,30 @@ const plans = [
 
 export default function Pricing() {
   const [billingPeriod, setBillingPeriod] = useState('monthly');
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
-  const handleStripePayment = (planName) => {
-    // This would integrate with Stripe
-    alert(`Redirecting to Stripe for ${planName} plan payment...`);
-    // In a real app, you would redirect to Stripe Checkout
-    console.log('Stripe integration for plan:', planName);
+  const handlePaymentSuccess = () => {
+    alert('Payment successful! Welcome to CulturaHub Pro!');
+    setShowPayment(false);
+    setSelectedPlan(null);
+  };
+
+  const handlePaymentError = (error: string) => {
+    alert(`Payment failed: ${error}`);
+    setShowPayment(false);
+  };
+
+  const handleUpgrade = (planName: string) => {
+    if (planName === 'Pro') {
+      setSelectedPlan(planName);
+      setShowPayment(true);
+    }
+  };
+
+  const getPrice = (plan: typeof plans[0]) => {
+    if (plan.name === 'Free') return 0;
+    return billingPeriod === 'yearly' ? Math.round(plan.price * 0.8) : plan.price;
   };
 
   return (
@@ -99,6 +117,29 @@ export default function Pricing() {
         </div>
       </div>
 
+      {/* Payment Modal */}
+      {showPayment && selectedPlan && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-gray-900">Complete Your Purchase</h2>
+              <button
+                onClick={() => setShowPayment(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                ✕
+              </button>
+            </div>
+            <RazorpayPayment
+              plan="pro"
+              amount={getPrice(plans[1])}
+              onSuccess={handlePaymentSuccess}
+              onError={handlePaymentError}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Pricing Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
         {plans.map((plan) => (
@@ -131,14 +172,14 @@ export default function Pricing() {
               <p className="text-gray-600 mb-4">{plan.description}</p>
               <div className="flex items-baseline justify-center">
                 <span className="text-4xl font-bold text-gray-900">
-                  {billingPeriod === 'yearly' && plan.name === 'Pro' ? '$7' : plan.price}
+                  ₹{getPrice(plan)}
                 </span>
                 <span className="text-gray-500 ml-1">
                   {plan.name === 'Free' ? '' : billingPeriod === 'yearly' ? '/month' : plan.period}
                 </span>
               </div>
               {billingPeriod === 'yearly' && plan.name === 'Pro' && (
-                <p className="text-sm text-mint-600 mt-1">Billed annually ($84/year)</p>
+                <p className="text-sm text-mint-600 mt-1">Billed annually (₹{getPrice(plan) * 12}/year)</p>
               )}
             </div>
 
@@ -155,16 +196,13 @@ export default function Pricing() {
             </div>
 
             <button
-              onClick={() => plan.name === 'Pro' ? handleStripePayment(plan.name) : null}
+              onClick={() => handleUpgrade(plan.name)}
               className={`w-full py-3 px-6 rounded-lg font-semibold text-center transition-colors ${
                 plan.popular
                   ? 'bg-gradient-to-r from-mint-500 to-lavender-500 text-white hover:from-mint-600 hover:to-lavender-600 transform hover:scale-105 shadow-lg'
                   : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
               }`}
             >
-              {plan.name === 'Pro' && (
-                <CreditCard className="w-4 h-4 inline mr-2" />
-              )}
               {plan.cta}
             </button>
 
@@ -248,15 +286,19 @@ export default function Pricing() {
             },
             {
               question: "What payment methods do you accept?",
-              answer: "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal through our secure Stripe integration."
+              answer: "We accept all major credit cards, debit cards, UPI, net banking, and digital wallets through our secure Razorpay integration."
             },
             {
               question: "Is there a free trial for the Pro plan?",
-              answer: "Yes! We offer a 14-day free trial for the Pro plan. No credit card required to start your trial."
+              answer: "Yes! We offer a 14-day free trial for the Pro plan. No payment required to start your trial."
             },
             {
               question: "Can I cancel my subscription anytime?",
               answer: "Absolutely. You can cancel your subscription at any time from your account settings. There are no cancellation fees."
+            },
+            {
+              question: "Is my payment information secure?",
+              answer: "Yes, all payments are processed through Razorpay with bank-level security and 256-bit SSL encryption."
             }
           ].map((faq, index) => (
             <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
