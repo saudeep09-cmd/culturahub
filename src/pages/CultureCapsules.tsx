@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Bell, Calendar, Globe, Star, Check } from 'lucide-react';
+import { Mail, Bell, Calendar, Globe, Star, Check, RefreshCw } from 'lucide-react';
+import { useRandomCulturalFact } from '../hooks/useWikipedia';
+import CulturalFactCard from '../components/CulturalFactCard';
 
 const sampleCapsules = [
   {
@@ -61,6 +63,9 @@ export default function CultureCapsules() {
     modernCulture: false
   });
 
+  // Get random cultural fact from Wikipedia
+  const { fact, loading, error, fetchNewFact } = useRandomCulturalFact();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubscribed(true);
@@ -79,6 +84,22 @@ export default function CultureCapsules() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Daily Culture Capsules</h1>
         <p className="text-gray-600">Discover fascinating cultural insights, stories, and facts delivered straight to your inbox.</p>
+      </div>
+
+      {/* Live Cultural Fact */}
+      <div className="mb-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Today's Cultural Insight</h2>
+          <button
+            onClick={fetchNewFact}
+            disabled={loading}
+            className="flex items-center space-x-2 text-lavender-600 hover:text-lavender-700 transition-colors"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            <span>New Fact</span>
+          </button>
+        </div>
+        <CulturalFactCard fact={fact} loading={loading} onRefresh={fetchNewFact} />
       </div>
 
       {/* Recent Capsules Preview */}
@@ -242,7 +263,7 @@ export default function CultureCapsules() {
             <Globe className="w-6 h-6 text-white" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Global Perspectives</h3>
-          <p className="text-gray-600">Explore cultural stories from around the world, from ancient traditions to modern movements.</p>
+          <p className="text-gray-600">Explore cultural stories from around the world, powered by Wikipedia's vast knowledge base.</p>
         </div>
         
         <div className="text-center">

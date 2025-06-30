@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Map, DollarSign, Headphones, Clock, Mail, ArrowRight, Star, Users, Trophy } from 'lucide-react';
+import { Calendar, Map, DollarSign, Headphones, Clock, Mail, ArrowRight, Star, Users, Trophy, Wifi } from 'lucide-react';
+import { useRandomCulturalFact } from '../hooks/useWikipedia';
+import CulturalFactCard from '../components/CulturalFactCard';
 
 const features = [
   {
@@ -76,6 +78,8 @@ const testimonials = [
 ];
 
 export default function Home() {
+  const { fact, loading, fetchNewFact } = useRandomCulturalFact();
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -106,8 +110,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Live Cultural Fact Section */}
       <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Wifi className="w-6 h-6 text-mint-500" />
+              <h2 className="text-2xl font-bold text-gray-900">Live Cultural Insights</h2>
+            </div>
+            <p className="text-gray-600">Powered by Wikipedia's vast knowledge base</p>
+          </div>
+          <CulturalFactCard fact={fact} loading={loading} onRefresh={fetchNewFact} />
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -124,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -163,7 +181,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -176,7 +194,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-sm">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-peach-400 fill-current" />
