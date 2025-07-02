@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,20 +7,71 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-mint-500 to-mint-600 text-white px-6 py-3 rounded-lg font-medium hover:from-mint-600 hover:to-mint-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-cultural-red-600 to-cultural-red-700 text-white px-6 py-3 rounded-lg font-medium hover:from-cultural-red-700 hover:to-cultural-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
   }
   
   .btn-secondary {
-    @apply bg-white text-mint-600 px-6 py-3 rounded-lg font-medium hover:bg-mint-50 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl border border-mint-200;
+    @apply bg-cultural-beige-100 text-cultural-blue-800 px-6 py-3 rounded-lg font-medium hover:bg-cultural-beige-200 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg border border-cultural-beige-300;
   }
   
-  .feature-card {
-    @apply bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100;
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-cultural-beige-200;
   }
   
-  .gradient-bg {
-    @apply bg-gradient-to-br from-mint-50 via-lavender-50 to-peach-50;
+  .cultural-gradient {
+    @apply bg-gradient-to-br from-cultural-red-50 via-cultural-beige-50 to-cultural-blue-50;
   }
+
+  .timeline-item {
+    @apply relative pl-8 pb-8 border-l-2 border-cultural-gold-300;
+  }
+
+  .timeline-item::before {
+    @apply absolute w-4 h-4 bg-cultural-gold-500 rounded-full -left-2 top-0;
+    content: '';
+  }
+
+  .timeline-item:last-child {
+    @apply border-l-0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Smooth animations */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Cultural patterns */
+.pattern-dots {
+  background-image: radial-gradient(circle, #f3e5c7 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pattern-lines {
+  background-image: linear-gradient(45deg, transparent 40%, #f3e5c7 40%, #f3e5c7 60%, transparent 60%);
+  background-size: 30px 30px;
 }

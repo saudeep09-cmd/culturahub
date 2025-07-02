@@ -1,140 +1,91 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Map, DollarSign, Headphones, Clock, Mail, ArrowRight, Star, Users, Trophy, Wifi } from 'lucide-react';
-import { useRandomCulturalFact } from '../hooks/useWikipedia';
-import CulturalFactCard from '../components/CulturalFactCard';
+import { MapPin, Headphones, Clock, PlusCircle, Sparkles, Globe, Users, Calendar } from 'lucide-react';
+import AskCultura from '../components/AskCultura';
 
 const features = [
   {
-    icon: Calendar,
-    title: 'Explore Events',
-    description: 'Discover cultural events in your city with smart filtering by date, location, and interests.',
+    icon: MapPin,
+    title: 'Event Explorer',
+    description: 'Discover art exhibitions, museums, and cultural events on an interactive map with real-time updates.',
     link: '/events',
-    color: 'from-mint-400 to-mint-600'
-  },
-  {
-    icon: Map,
-    title: 'Heritage Trails',
-    description: 'Interactive maps with cultural landmarks, stories, and guided walking tours.',
-    link: '/trails',
-    color: 'from-lavender-400 to-lavender-600'
-  },
-  {
-    icon: DollarSign,
-    title: 'Grants & Residencies',
-    description: 'Searchable database of funding opportunities for artists and cultural projects.',
-    link: '/grants',
-    color: 'from-peach-400 to-peach-600'
+    color: 'from-cultural-red-400 to-cultural-red-600'
   },
   {
     icon: Headphones,
-    title: 'Audio Guide Creator',
-    description: 'Create immersive audio experiences for locations, museums, and cultural sites.',
-    link: '/audio-guide',
-    color: 'from-sky-400 to-sky-600'
+    title: 'Audio Zone',
+    description: 'Listen to curated podcasts about art, culture, and history from leading cultural institutions.',
+    link: '/audio',
+    color: 'from-cultural-gold-400 to-cultural-gold-600'
   },
   {
     icon: Clock,
-    title: 'Create Timelines',
-    description: 'Build interactive timelines to showcase cultural history and significant events.',
-    link: '/timelines',
-    color: 'from-mint-400 to-lavender-500'
+    title: 'Cultural Timeline',
+    description: 'Explore historical events and cultural movements through interactive timelines and stories.',
+    link: '/timeline',
+    color: 'from-cultural-blue-400 to-cultural-blue-600'
   },
   {
-    icon: Mail,
-    title: 'Daily Culture Capsules',
-    description: 'Subscribe to daily cultural insights, facts, and discoveries delivered to your inbox.',
-    link: '/culture-capsules',
-    color: 'from-peach-400 to-sky-500'
+    icon: PlusCircle,
+    title: 'Creator Submission',
+    description: 'Artists and historians can submit their events, talks, and cultural content to our platform.',
+    link: '/submit',
+    color: 'from-cultural-beige-400 to-cultural-beige-600'
   }
 ];
 
 const stats = [
-  { icon: Users, number: '50K+', label: 'Active Users' },
-  { icon: Calendar, number: '10K+', label: 'Events Hosted' },
-  { icon: Map, number: '500+', label: 'Heritage Trails' },
-  { icon: Trophy, number: '1K+', label: 'Grants Found' }
-];
-
-const testimonials = [
-  {
-    name: 'Sarah Chen',
-    role: 'Cultural Curator',
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1',
-    text: 'CulturaHub transformed how we connect with our community. The audio guide creator helped us make our museum truly interactive.'
-  },
-  {
-    name: 'Marcus Johnson',
-    role: 'Event Organizer',
-    image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1',
-    text: 'The event discovery features are incredible. We\'ve seen a 300% increase in attendance since joining CulturaHub.'
-  },
-  {
-    name: 'Elena Rodriguez',
-    role: 'Heritage Researcher',
-    image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1',
-    text: 'Creating heritage trails has never been easier. The platform\'s intuitive design helped us share our city\'s rich history.'
-  }
+  { icon: Globe, number: '500+', label: 'Cultural Events' },
+  { icon: Users, number: '10K+', label: 'Community Members' },
+  { icon: Calendar, number: '50+', label: 'Cities Covered' },
+  { icon: Sparkles, number: '1K+', label: 'Cultural Facts' }
 ];
 
 export default function Home() {
-  const { fact, loading, fetchNewFact } = useRandomCulturalFact();
-
   return (
     <div className="animate-fade-in">
+      <AskCultura />
+      
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-mint-100 via-lavender-100 to-peach-100 opacity-50"></div>
+      <section className="relative overflow-hidden bg-hero-pattern">
+        <div className="absolute inset-0 bg-gradient-to-br from-cultural-red-50/80 via-cultural-beige-50/80 to-cultural-blue-50/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 animate-slide-up">
-              Your Cultural Journey
-              <span className="block bg-gradient-to-r from-mint-600 to-lavender-600 bg-clip-text text-transparent">
-                Starts Here
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-cultural-blue-900 mb-6 animate-slide-up">
+              Discover Culture
+              <span className="block bg-gradient-to-r from-cultural-red-600 to-cultural-gold-600 bg-clip-text text-transparent">
+                In Real-Time
               </span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-slide-up">
-              Discover, create, and share cultural experiences with CulturaHub. From local events to heritage trails, 
-              we connect communities through the power of culture and storytelling.
+            <p className="text-xl md:text-2xl text-cultural-blue-700 mb-8 max-w-4xl mx-auto animate-slide-up leading-relaxed">
+              Explore art exhibitions, listen to cultural podcasts, dive into historical timelines, 
+              and connect with a vibrant community of culture enthusiasts worldwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-              <Link to="/events" className="btn-primary text-lg px-8 py-4">
+              <Link to="/events" className="btn-primary text-lg px-8 py-4 font-serif">
                 Start Exploring
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <MapPin className="ml-2 w-5 h-5" />
               </Link>
-              <Link to="/pricing" className="btn-secondary text-lg px-8 py-4">
-                View Pricing
+              <Link to="/audio" className="btn-secondary text-lg px-8 py-4 font-serif">
+                Listen Now
+                <Headphones className="ml-2 w-5 h-5" />
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Live Cultural Fact Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Wifi className="w-6 h-6 text-mint-500" />
-              <h2 className="text-2xl font-bold text-gray-900">Live Cultural Insights</h2>
-            </div>
-            <p className="text-gray-600">Powered by Wikipedia's vast knowledge base</p>
-          </div>
-          <CulturalFactCard fact={fact} loading={loading} onRefresh={fetchNewFact} />
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-mint-500 to-lavender-500 rounded-lg mb-4">
-                  <stat.icon className="w-6 h-6 text-white" />
+              <div key={index} className="text-center group">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cultural-red-500 to-cultural-gold-500 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-4xl font-serif font-bold text-cultural-blue-900 mb-1">{stat.number}</div>
+                <div className="text-cultural-blue-600 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -142,37 +93,37 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 cultural-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Everything You Need for Cultural Exploration
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-cultural-blue-900 mb-4">
+              Your Cultural Journey Awaits
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Powerful tools designed to help you discover, create, and share cultural experiences 
-              that bring communities together.
+            <p className="text-xl text-cultural-blue-700 max-w-3xl mx-auto">
+              Immerse yourself in a world of art, history, and culture with our comprehensive platform 
+              designed for curious minds and cultural enthusiasts.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
               <Link
                 key={index}
                 to={feature.link}
-                className="feature-card group"
+                className="card group hover:scale-105 transition-all duration-300"
               >
-                <div className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${feature.color} rounded-lg mb-4 group-hover:scale-110 transition-transform duration-200`}>
-                  <feature.icon className="w-6 h-6 text-white" />
+                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-2xl font-serif font-semibold text-cultural-blue-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-cultural-blue-700 mb-4 leading-relaxed">
                   {feature.description}
                 </p>
-                <div className="flex items-center text-mint-600 font-medium group-hover:text-mint-700">
-                  Learn More
-                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="flex items-center text-cultural-red-600 font-medium group-hover:text-cultural-red-700">
+                  Explore Now
+                  <Sparkles className="ml-2 w-4 h-4 group-hover:animate-pulse" />
                 </div>
               </Link>
             ))}
@@ -180,68 +131,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Loved by Cultural Communities
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how CulturaHub is transforming cultural experiences around the world.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-peach-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-4 italic">
-                  "{testimonial.text}"
-                </p>
-                <div className="flex items-center">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-gray-600 text-sm">{testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-mint-600 to-lavender-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Start Your Cultural Journey?
+      <section className="py-20 bg-gradient-to-r from-cultural-blue-900 to-cultural-red-900 relative overflow-hidden">
+        <div className="absolute inset-0 pattern-dots opacity-10"></div>
+        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+            Join the Cultural Revolution
           </h2>
-          <p className="text-xl text-mint-100 mb-8">
-            Join thousands of cultural enthusiasts and creators who are already using CulturaHub 
-            to discover and share amazing experiences.
+          <p className="text-xl text-cultural-beige-200 mb-8 leading-relaxed">
+            Connect with fellow culture enthusiasts, discover hidden gems, and contribute to a growing 
+            community of art and history lovers from around the world.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/events" 
-              className="bg-white text-mint-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors transform hover:scale-105 shadow-lg"
+              className="bg-white text-cultural-blue-900 px-8 py-4 rounded-lg font-serif font-semibold text-lg hover:bg-cultural-beige-100 transition-colors transform hover:scale-105 shadow-lg"
             >
-              Get Started Free
+              Start Discovering
             </Link>
             <Link 
-              to="/pricing" 
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-mint-600 transition-colors transform hover:scale-105"
+              to="/submit" 
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-serif font-semibold text-lg hover:bg-white hover:text-cultural-blue-900 transition-colors transform hover:scale-105"
             >
-              View Plans
+              Share Your Culture
             </Link>
           </div>
         </div>
