@@ -1,31 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import EventExplorer from './pages/EventExplorer';
-import AudioZone from './pages/AudioZone';
-import Timeline from './pages/Timeline';
-import CreatorSubmission from './pages/CreatorSubmission';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './contexts/AuthContext'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import EventsMap from './pages/EventsMap'
+import AudioLibrary from './pages/AudioLibrary'
+import Timeline from './pages/Timeline'
+import Grants from './pages/Grants'
+import Dashboard from './pages/Dashboard'
+import AskCultura from './components/AskCultura'
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen cultural-gradient">
-        <Header />
-        <main className="pt-20">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/events" element={<EventExplorer />} />
-            <Route path="/audio" element={<AudioZone />} />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/submit" element={<CreatorSubmission />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
-  );
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen cultural-gradient">
+          <Header />
+          <main className="pt-20">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/events" element={<EventsMap />} />
+              <Route path="/audio" element={<AudioLibrary />} />
+              <Route path="/timeline" element={<Timeline />} />
+              <Route path="/grants" element={<Grants />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </main>
+          <Footer />
+          <AskCultura />
+        </div>
+      </Router>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App

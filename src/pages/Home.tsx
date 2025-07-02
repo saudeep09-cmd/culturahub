@@ -1,19 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, Headphones, Clock, PlusCircle, Sparkles, Globe, Users, Calendar } from 'lucide-react';
-import AskCultura from '../components/AskCultura';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { MapPin, Headphones, Clock, DollarSign, Sparkles, Globe, Users, Calendar } from 'lucide-react'
 
 const features = [
   {
     icon: MapPin,
-    title: 'Event Explorer',
+    title: 'Cultural Events Map',
     description: 'Discover art exhibitions, museums, and cultural events on an interactive map with real-time updates.',
     link: '/events',
     color: 'from-cultural-red-400 to-cultural-red-600'
   },
   {
     icon: Headphones,
-    title: 'Audio Zone',
+    title: 'Audio Library',
     description: 'Listen to curated podcasts about art, culture, and history from leading cultural institutions.',
     link: '/audio',
     color: 'from-cultural-gold-400 to-cultural-gold-600'
@@ -26,26 +25,24 @@ const features = [
     color: 'from-cultural-blue-400 to-cultural-blue-600'
   },
   {
-    icon: PlusCircle,
-    title: 'Creator Submission',
-    description: 'Artists and historians can submit their events, talks, and cultural content to our platform.',
-    link: '/submit',
-    color: 'from-cultural-beige-400 to-cultural-beige-600'
+    icon: DollarSign,
+    title: 'Grants & Residencies',
+    description: 'Find funding opportunities for artists, cultural projects, and creative endeavors.',
+    link: '/grants',
+    color: 'from-cultural-green-400 to-cultural-green-600'
   }
-];
+]
 
 const stats = [
   { icon: Globe, number: '500+', label: 'Cultural Events' },
   { icon: Users, number: '10K+', label: 'Community Members' },
   { icon: Calendar, number: '50+', label: 'Cities Covered' },
   { icon: Sparkles, number: '1K+', label: 'Cultural Facts' }
-];
+]
 
 export default function Home() {
   return (
     <div className="animate-fade-in">
-      <AskCultura />
-      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-hero-pattern">
         <div className="absolute inset-0 bg-gradient-to-br from-cultural-red-50/80 via-cultural-beige-50/80 to-cultural-blue-50/80"></div>
@@ -54,16 +51,16 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-cultural-blue-900 mb-6 animate-slide-up">
               Discover Culture
               <span className="block bg-gradient-to-r from-cultural-red-600 to-cultural-gold-600 bg-clip-text text-transparent">
-                In Real-Time
+                Connect & Create
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-cultural-blue-700 mb-8 max-w-4xl mx-auto animate-slide-up leading-relaxed">
-              Explore art exhibitions, listen to cultural podcasts, dive into historical timelines, 
-              and connect with a vibrant community of culture enthusiasts worldwide.
+              Explore cultural events on interactive maps, listen to curated podcasts, dive into historical timelines, 
+              and discover funding opportunities - all powered by Supabase and built for cultural communities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
               <Link to="/events" className="btn-primary text-lg px-8 py-4 font-serif">
-                Start Exploring
+                Explore Events
                 <MapPin className="ml-2 w-5 h-5" />
               </Link>
               <Link to="/audio" className="btn-secondary text-lg px-8 py-4 font-serif">
@@ -136,7 +133,7 @@ export default function Home() {
         <div className="absolute inset-0 pattern-dots opacity-10"></div>
         <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-            Join the Cultural Revolution
+            Join the Cultural Community
           </h2>
           <p className="text-xl text-cultural-beige-200 mb-8 leading-relaxed">
             Connect with fellow culture enthusiasts, discover hidden gems, and contribute to a growing 
@@ -150,14 +147,14 @@ export default function Home() {
               Start Discovering
             </Link>
             <Link 
-              to="/submit" 
+              to="/dashboard" 
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-serif font-semibold text-lg hover:bg-white hover:text-cultural-blue-900 transition-colors transform hover:scale-105"
             >
-              Share Your Culture
+              Join Community
             </Link>
           </div>
         </div>
       </section>
     </div>
-  );
+  )
 }
